@@ -1,7 +1,7 @@
 import { SlashCommandBuilder } from "discord.js";
-import { ping } from "../commands/ping.js";
-import { textToSpeechCommand } from "../commands/text-to-speech.js";
-import { joinChannel } from "../commands/join.js";
+import { ping } from "../commands/ping";
+import { textToSpeechCommand } from "../commands/text-to-speech";
+import { joinChannel } from "../commands/join";
 export const textCommands = [
   {
     name: "ping",

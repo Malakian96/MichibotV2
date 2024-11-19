@@ -1,15 +1,17 @@
-import { join } from "./join.js";
-import { play } from "./play.js";
-import { manageCharacterLimit } from "../helpers/characterHelper.js";
+import { join } from "./join";
+import { play } from "./play";
+import { manageCharacterLimit } from "../helpers/characterHelper";
 import {
   userIsInVoiceChannel,
   replyNotInChannel,
   reply,
   editReply
-} from "../helpers/voiceChannelHelper.js";
-import { createTTS } from "../helpers/ttsHelper.js";
+} from "../helpers/voiceChannelHelper";
+import { createTTS } from "../helpers/ttsHelper";
+import { Interaction } from "discord.js";
 
-export const textToSpeechCommand = async (interaction) => {
+export const textToSpeechCommand = async (interaction: Interaction | any) => {
+  if (!interaction.member) return;
   // Check if the user is in a voice channel
   const userVoiceChannel = interaction.member.voice.channel;
   if (!userIsInVoiceChannel(interaction)) {
@@ -49,10 +51,10 @@ export const textToSpeechCommand = async (interaction) => {
     await play("tts-output.mp3", connection, false);
   } catch (error) {
     console.error("Error generating TTS:", error);
-    await editReply({
+    await editReply(
       interaction,
-      content: "Failed to generate TTS. Please try again.",
-      ephemeral: true,
-    });
+      "Failed to generate TTS. Please try again.",
+      true,
+    );
   }
 };

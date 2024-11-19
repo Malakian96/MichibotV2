@@ -3,9 +3,10 @@
   "version": "0.0.1",
   "description": "Michibot v2 for discord",
   "main": "index.js",
-  "type": "module",
   "scripts": {
-    "start": "node --env-file=.env index.js"
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "nodemon --watch \"src/**\" --ext \"ts,json\" --ignore \"src/**/*.spec.ts\" --exec \"ts-node src/index.ts\""
   },
   "author": "Malakian",
   "license": "MIT",
@@ -15,6 +16,13 @@
     "assemblyai": "^4.8.0",
     "discord.js": "^14.16.3",
     "ffmpeg-static": "^5.2.0",
-    "libsodium-wrappers": "^0.7.15"
+    "libsodium-wrappers": "^0.7.15",
+    "ts-node": "^10.9.2"
+  },
+  "devDependencies": {
+    "@types/node": "^22.9.0",
+    "dotenv": "^16.4.5",
+    "nodemon": "^3.1.7",
+    "typescript": "^5.6.3"
   }
 }

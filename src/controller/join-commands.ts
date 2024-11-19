@@ -1,16 +1,17 @@
-import { join } from "../commands/join.js";
-import { play } from "../commands/play.js";
+import { VoiceState } from "discord.js";
+import { join } from "../commands/join";
+import { play } from "../commands/play";
 
-export const handleJoinCommands = (oldState, newState) => {
+export const handleJoinCommands = (oldState: VoiceState, newState: VoiceState) => {
   console.log("Old Channel ID:", oldState.channelId);
   console.log("New Channel ID:", newState.channelId);
   if (newState.channelId === null) {
-    if (oldState.member.id == "1303130781580918954") return;
+    if (oldState?.member?.id == "1303130781580918954") return;
     console.log("user left channel", oldState.channelId);
     const connection = join(oldState.channel)
     play('sad-meow.mp3', connection, false)
   } else if (oldState.channelId === null) {
-    if (newState.member.id == "1303130781580918954") return;
+    if (newState?.member?.id == "1303130781580918954") return;
     console.log("user joined channel", newState.channelId);
     const connection = join(newState.channel)
     play('meow.mp3', connection, false)

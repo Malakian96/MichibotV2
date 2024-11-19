@@ -1,8 +1,9 @@
 import textToSpeech from "@google-cloud/text-to-speech";
+import { google } from "@google-cloud/text-to-speech/build/protos/protos";
 import fs from "fs";
 import path from "path";
 
-export const createTTS = async (request) => {
+export const createTTS = async (request: google.cloud.texttospeech.v1.ISynthesizeSpeechRequest | {}) => {
   // Initialize Google Cloud Text-to-Speech client
   const client = new textToSpeech.TextToSpeechClient();
   // Perform the TTS request
@@ -15,6 +16,6 @@ export const createTTS = async (request) => {
     console.log("Existing file deleted: assets/tts-output.mp3");
   }
 
-  fs.writeFileSync(ttsFilePath, response.audioContent, "binary");
+  fs.writeFileSync(ttsFilePath, response.audioContent as any, "binary");
   console.log("Audio content written to file: tts-output.mp3");
 };

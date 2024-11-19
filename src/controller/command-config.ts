@@ -1,8 +1,10 @@
+import * as dotenv from "dotenv";
+dotenv.config();
 import { REST, Routes } from "discord.js";
-import { commands } from "./command-router.js";
+import { commands } from "./command-router";
 
-const CLIENT_ID = process.env.CLIENT_ID;
-const TOKEN = process.env.TOKEN;
+const CLIENT_ID = process.env.CLIENT_ID ?? "";
+const TOKEN = process.env.TOKEN ?? "";
 
 const rest = new REST({ version: "10" }).setToken(TOKEN);
 

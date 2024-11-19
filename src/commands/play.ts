@@ -2,14 +2,15 @@ import {
   createAudioPlayer,
   createAudioResource,
   AudioPlayerStatus,
+  VoiceConnection,
 } from "@discordjs/voice";
-import { fileURLToPath } from "url";
+// import { fileURLToPath } from "url";
 import path from "path";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+// const __filename = fileURLToPath(import.meta.url);
+// const __dirname = path.dirname(__filename);
 
-export const play = (resourceName, connection, destroy = true) => {
+export const play = (resourceName: string, connection: VoiceConnection, destroy = true) => {
   // Crear un reproductor de audio
   const player = createAudioPlayer();
 

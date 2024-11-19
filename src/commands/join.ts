@@ -1,15 +1,14 @@
-import { joinVoiceChannel, getVoiceConnection } from "@discordjs/voice";
-import { reply } from "../helpers/voiceChannelHelper.js";
-import { play } from "./play.js";
+import { joinVoiceChannel, getVoiceConnection, VoiceConnection } from "@discordjs/voice";
+import { reply } from "../helpers/voiceChannelHelper";
+import { play } from "./play";
 
 const userActivity = new Map(); // Para rastrear canales y su actividad
 
-export const join = (channel) => {
+export const join = (channel: any): VoiceConnection => {
   const voiceChannel = channel;
 
   if (!voiceChannel) {
-    console.error("El canal de voz no existe!");
-    return;
+    throw Error("El canal de voz no existe!")
   }
   // const existingConnection = getVoiceConnection(voiceChannel.guild.id);
 
@@ -25,11 +24,11 @@ export const join = (channel) => {
   });
 };
 // Función para monitorear actividad de usuarios
-function monitorUserActivity(connection, voiceChannel) {
+function monitorUserActivity(connection: VoiceConnection, voiceChannel: { members: { get: (arg0: any) => any; }; }) {
   const receiver = connection.receiver;
 
   // Escucha cuando un usuario empieza a hablar
-  receiver.speaking.on("start", (userId) => {
+  receiver.speaking.on("start", (userId: any) => {
     const user = voiceChannel.members.get(userId);
 
     if (!user) return; // El usuario no está en el canal (por seguridad)
@@ -38,7 +37,7 @@ function monitorUserActivity(connection, voiceChannel) {
   });
 
   // Escucha cuando un usuario deja de hablar
-  receiver.speaking.on("end", (userId) => {
+  receiver.speaking.on("end", (userId: any) => {
     const user = voiceChannel.members.get(userId);
 
     if (!user) return;
@@ -69,7 +68,7 @@ function monitorUserActivity(connection, voiceChannel) {
   }, 5000); // Verifica cada 5 segundos
 }
 
-export const joinChannel = (interaction) => {
+export const joinChannel = (interaction: { member: { voice: { channel: any; }; }; }) => {
   const channel = interaction.member.voice.channel;
   const connection = join(channel);
   reply(interaction, "Michibot joined", true);

@@ -8,7 +8,7 @@ const DAILY_CHAR_LIMIT = 3333;
  * @param {number} textLength - The length of the text to add.
  * @returns {boolean} - Returns true if the operation was successful, otherwise false.
  */
-export const manageCharacterLimit = (textLength) => {
+export const manageCharacterLimit = (textLength: number) => {
   try {
     const tmpDir = path.resolve("tmp");
     const today = new Date().toISOString().split("T")[0]; // Get today's date (YYYY-MM-DD)
