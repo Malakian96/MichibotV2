@@ -1,0 +1,20 @@
+{
+  "name": "michibotv2",
+  "version": "0.0.1",
+  "description": "Michibot v2 for discord",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node --env-file=.env index.js"
+  },
+  "author": "Malakian",
+  "license": "MIT",
+  "dependencies": {
+    "@discordjs/voice": "^0.17.0",
+    "@google-cloud/text-to-speech": "^5.6.0",
+    "assemblyai": "^4.8.0",
+    "discord.js": "^14.16.3",
+    "ffmpeg-static": "^5.2.0",
+    "libsodium-wrappers": "^0.7.15"
+  }
+}
