@@ -1,0 +1,15 @@
+services:
+  michibot-v2:
+    build: .
+    container_name: michibot-v2
+    restart: always
+    environment:
+      CLIENT_ID: ${CLIENT_ID}
+      TOKEN: ${TOKEN}
+      BOT_ID: ${BOT_ID}
+      OAUTH_GOOGLE: ${OAUTH_GOOGLE}
+      GOOGLE_APPLICATION_CREDENTIALS: ${GOOGLE_APPLICATION_CREDENTIALS}
+    volumes:
+      - ./logs:/usr/src/app/logs # Ejemplo: guardar logs en el host
+    ports:
+      - "3000:3000" # Cambia el puerto si tu bot usa uno
