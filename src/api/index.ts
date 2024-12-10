@@ -1,4 +1,5 @@
 import express from 'express';
+import cors from 'cors';
 import clientHelper from '../helpers/clientHelper';
 import { join } from '../bot/commands/join';
 import { play } from '../bot/commands/play';
@@ -7,6 +8,8 @@ export const start = () => {
     const client = clientHelper.getClient();
 
     const app = express();
+
+    app.use(cors())
     app.use(express.json())
     app.use(express.urlencoded({ extended: true }))
 
