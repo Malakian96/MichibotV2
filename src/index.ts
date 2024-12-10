@@ -1,23 +1,14 @@
-import { Client, GatewayIntentBits, Events } from "discord.js";
-import { refreshSlashCommands } from "./controller/command-config";
-import { handleJoinCommands } from "./controller/join-commands";
-import { handleTextCommands } from "./controller/text-commands";
-import * as dotenv from "dotenv";
-dotenv.config();
- 
-const client = new Client({
-  intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildVoiceStates],
-});
+import { start as startBot } from "./bot";
+import { start as startApi } from "./api";
+import ClientHelper from "./helpers/clientHelper";
 
-const TOKEN = process.env.TOKEN;
-refreshSlashCommands();
+const startSingletons = async () => {
+    await ClientHelper.login();
+}
 
-client.on("ready", () => {
-  console.log(`Logged in asss ${client?.user?.tag}!`);
-});
+(async () => {
+    startSingletons();
+    startBot();
+    startApi();
+})();
 
-client.on(Events.InteractionCreate, handleTextCommands);
-client.on(Events.VoiceStateUpdate, (oldState, newState) => { handleJoinCommands(oldState, newState) });
-
-
-client.login(TOKEN);

@@ -17,7 +17,7 @@ export const play = (resourceName: string, connection: VoiceConnection, destroy 
   // Crear el recurso de audio con el sonido del maullido
   console.log("Playing sound...", resourceName);
   const resource = createAudioResource(
-    path.join(__dirname, "../..", "assets", resourceName)
+    path.join(__dirname, "../../..", "assets", resourceName)
   );
 
   // Reproducir el audio

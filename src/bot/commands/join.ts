@@ -1,5 +1,5 @@
-import { joinVoiceChannel, getVoiceConnection, VoiceConnection } from "@discordjs/voice";
-import { reply } from "../helpers/voiceChannelHelper";
+import { joinVoiceChannel, VoiceConnection } from "@discordjs/voice";
+import { reply } from "../../helpers/voiceChannelHelper";
 import { play } from "./play";
 
 const userActivity = new Map(); // Para rastrear canales y su actividad
