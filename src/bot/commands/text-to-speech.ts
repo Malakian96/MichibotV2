@@ -1,13 +1,13 @@
 import { join } from "./join";
 import { play } from "./play";
-import { manageCharacterLimit } from "../helpers/characterHelper";
+import { manageCharacterLimit } from "../../helpers/characterHelper";
 import {
   userIsInVoiceChannel,
   replyNotInChannel,
   reply,
   editReply
-} from "../helpers/voiceChannelHelper";
-import { createTTS } from "../helpers/ttsHelper";
+} from "../../helpers/voiceChannelHelper";
+import { createTTS } from "../../helpers/ttsHelper";
 import { Interaction } from "discord.js";
 
 export const textToSpeechCommand = async (interaction: Interaction | any) => {
