@@ -13,7 +13,7 @@ export const start = () => {
     app.use(express.json())
     app.use(express.urlencoded({ extended: true }))
 
-    app.listen(3000, () =>
+    app.listen(8080, () =>
         console.log('Example app listening on port 3000!'),
     );
 
