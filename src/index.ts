@@ -7,8 +7,13 @@ const startSingletons = async () => {
 }
 
 (async () => {
-    startSingletons();
-    startBot();
-    startApi();
+    try{
+        startSingletons();
+        startBot();
+        startApi();
+    }catch(error){
+        console.error("Fatal ERROR on ini", error)
+    }
+
 })();
 
