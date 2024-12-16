@@ -21,7 +21,7 @@ jobs:
       # Step 3: Build the Docker image for ARM
       - name: Build Docker image for ARM
         run: |
-          docker buildx build --platform linux/arm/v7 -t ${{ secrets.DOCKER_USERNAME }}/michibot:latest .
+          docker buildx build --platform linux/arm/v7 -t ${{ secrets.DOCKER_USERNAME }}/michibot .
 
       # Step 4: Login to Docker Hub
       - name: Log in to Docker Hub
@@ -60,6 +60,6 @@ jobs:
               -e BOT_ID=${{ secrets.BOT_ID }} \
               -e OAUTH_GOOGLE=${{ secrets.OAUTH_GOOGLE }} \
               -e GOOGLE_APPLICATION_CREDENTIALS="${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}" \
-              ${{ secrets.DOCKER_USERNAME }}/michibot:latest
+              ${{ secrets.DOCKER_USERNAME }}/michibot
 
             echo "Deployment complete!"
