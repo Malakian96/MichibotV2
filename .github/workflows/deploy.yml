@@ -3,7 +3,7 @@ name: Deploy Michibot to Raspberry Pi
 on:
   push:
     branches:
-      - master  # Trigger deployment when pushing to the main branch
+      - main  # Trigger deployment when pushing to the main branch
 
 jobs:
   deploy:
@@ -21,14 +21,20 @@ jobs:
       # Step 3: Build the Docker image for ARM
       - name: Build Docker image for ARM
         run: |
-          docker buildx build --platform linux/arm/v7 -t michibot:latest .
+          docker buildx build --platform linux/arm/v7 -t michibot .
 
-      # Step 4: Save the Docker image as a .tar file
+      # Step 4: Verify Docker image exists
+      - name: Verify Docker image exists
+        run: |
+          docker images
+          docker images | grep "michibot"
+
+      # Step 5: Save the Docker image as a .tar file
       - name: Save Docker image
         run: |
-          docker save michibot:latest > michibot.tar
+          docker save michibot > michibot.tar
 
-      # Step 5: Copy the Docker image to Raspberry Pi
+      # Step 6: Copy the Docker image to Raspberry Pi
       - name: Transfer image to Raspberry Pi
         uses: appleboy/scp-action@v0.1.4
         with:
@@ -38,7 +44,7 @@ jobs:
           source: "michibot.tar"
           target: "/home/alvaro/"
 
-      # Step 6: Load and restart the Docker container on Raspberry Pi
+      # Step 7: Load and restart the Docker container on Raspberry Pi
       - name: Deploy on Raspberry Pi
         uses: appleboy/ssh-action@v0.1.7
         with:
