@@ -1,4 +1,4 @@
-name: Deploy Michibot to Raspberry Pi
+name: Build and Deploy Michibot to Raspberry Pi
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - main  # Trigger deployment when pushing to the main branch
 
 jobs:
-  deploy:
+  build_and_deploy:
     runs-on: ubuntu-latest
 
     steps:
@@ -21,30 +21,21 @@ jobs:
       # Step 3: Build the Docker image for ARM
       - name: Build Docker image for ARM
         run: |
-          docker buildx build --platform linux/arm/v7 -t michibot .
+          docker buildx build --platform linux/arm/v7 -t ${{ secrets.DOCKER_USERNAME }}/michibot:latest .
 
-      # Step 4: Verify Docker image exists
-      - name: Verify Docker image exists
-        run: |
-          docker images
-          docker images | grep "michibot"
-
-      # Step 5: Save the Docker image as a .tar  file
-      - name: Save Docker image
-        run: |
-          docker save michibot > michibot.tar
-
-      # Step 6: Copy the Docker image to Raspberry Pi
-      - name: Transfer image to Raspberry Pi
-        uses: appleboy/scp-action@v0.1.4
+      # Step 4: Login to Docker Hub
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v2
         with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USERNAME }}
-          key: ${{ secrets.SSH_KEY }}
-          source: "michibot.tar"
-          target: "/home/alvaro/"
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
 
-      # Step 7: Load and restart the Docker container on Raspberry Pi
+      # Step 5: Push the Docker image to Docker Hub
+      - name: Push Docker image to Docker Hub
+        run: |
+          docker push ${{ secrets.DOCKER_USERNAME }}/michibot:latest
+
+      # Step 6: SSH into Raspberry Pi and deploy the container
       - name: Deploy on Raspberry Pi
         uses: appleboy/ssh-action@v0.1.7
         with:
@@ -52,10 +43,10 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_KEY }}
           script: |
-            # Load the Docker image
-            docker load < /home/alvaro/michibot.tar
-            
-            # Stop and remove existing container
+            # Pull the Docker image from Docker Hub
+            docker pull ${{ secrets.DOCKER_USERNAME }}/michibot:latest
+
+            # Stop and remove the existing container (if it exists)
             docker stop michibot || true
             docker rm michibot || true
             
@@ -69,6 +60,6 @@ jobs:
               -e BOT_ID=${{ secrets.BOT_ID }} \
               -e OAUTH_GOOGLE=${{ secrets.OAUTH_GOOGLE }} \
               -e GOOGLE_APPLICATION_CREDENTIALS="${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}" \
-              michibot:latest
+              ${{ secrets.DOCKER_USERNAME }}/michibot:latest
 
             echo "Deployment complete!"
