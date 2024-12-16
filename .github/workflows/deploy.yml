@@ -26,7 +26,7 @@ jobs:
       # Step 4: Save the Docker image as a .tar file
       - name: Save Docker image
         run: |
-          docker save michibot > michibot.tar
+          docker save michibot:latest > michibot.tar
 
       # Step 5: Copy the Docker image to Raspberry Pi
       - name: Transfer image to Raspberry Pi
