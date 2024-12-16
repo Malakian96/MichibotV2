@@ -29,7 +29,7 @@ jobs:
           docker images
           docker images | grep "michibot"
 
-      # Step 5: Save the Docker image as a .tar file
+      # Step 5: Save the Docker image as a .tar  file
       - name: Save Docker image
         run: |
           docker save michibot > michibot.tar
