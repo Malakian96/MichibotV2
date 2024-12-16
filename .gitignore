@@ -1,5 +1,6 @@
 /node_modules
 .env
+.env.local
 package-lock.json
 michibotv2-47cd15ffbda9.json
 *.txt

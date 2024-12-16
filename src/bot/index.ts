@@ -17,7 +17,17 @@ export const start = async () => {
         console.log(`Logged in as ${client?.user?.tag}!`);
     });
 
-    client.on(Events.InteractionCreate, handleTextCommands);
-    client.on(Events.VoiceStateUpdate, (oldState, newState) => { handleJoinCommands(oldState, newState) });
+    try {
+        client.on(Events.InteractionCreate, handleTextCommands);
+    } catch (error) {
+        console.error("Error handling text commands", error)
+    }
+
+
+    try {
+        client.on(Events.VoiceStateUpdate, (oldState, newState) => { handleJoinCommands(oldState, newState) });
+    } catch (error) {
+        console.error("Error handling joing commands", error)
+    }
 
 }
