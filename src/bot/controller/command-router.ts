@@ -27,6 +27,7 @@ export const textCommands = [
           .setName("text")
           .setDescription("The text you want to convert to speech")
           .setRequired(true)
+          .setMaxLength(100)
       )
       .addStringOption((option) =>
         option

@@ -22,6 +22,16 @@ export const textToSpeechCommand = async (interaction: Interaction | any) => {
   const gender = interaction.options.getString("voice") ?? "MALE";
   const languageCode = interaction.options.getString("language") ?? "es-ES";
 
+  if(text.length > 100){
+    console.error("Exceded maximum length for TTS:");
+    await editReply(
+      interaction,
+      "Exceded maximum length for TTS.",
+      true,
+    );
+    return;
+  }
+
   const { success, remainingChars } = manageCharacterLimit(text.length);
 
   if (!success) {
