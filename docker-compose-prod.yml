@@ -1,0 +1,4 @@
+services:
+  michibot-v2:
+    env_file:
+      - .env
