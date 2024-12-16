@@ -1,7 +1,7 @@
-# Usa una imagen base ligera de Node.js compatible con ARM (como Raspberry Pi)
+# Use a lightweight Node.js base image optimized for ARM
 FROM node:18-bullseye-slim
 
-# Establece el directorio de trabajo en el contenedor
+# Set the working directory inside the container
 WORKDIR /usr/src/app
 
 # Copia los archivos necesarios para instalar dependencias
