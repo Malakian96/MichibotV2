@@ -3,7 +3,7 @@ name: Build and Deploy Michibot to Raspberry Pi
 on:
   push:
     branches:
-      - main  # Trigger deployment when pushing to the main branch
+      - master  # Trigger deployment when pushing to the main branch
 
 jobs:
   build_and_deploy:
