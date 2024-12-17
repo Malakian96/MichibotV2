@@ -54,7 +54,7 @@ jobs:
             echo '${{ secrets.GOOGLE_APPLICATION_JSON }}' > /home/alvaro/${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
 
             # Run the new container
-            docker run -d --network nginx-proxy-network --name michibot -p 8080:8080 \
+            docker run -d --network nginx-proxy-network --name michibot -p 8081:8080 \
               -e CLIENT_ID=${{ secrets.CLIENT_ID }} \
               -e TOKEN=${{ secrets.TOKEN }} \
               -e BOT_ID=${{ secrets.BOT_ID }} \
