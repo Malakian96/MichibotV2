@@ -61,6 +61,6 @@ jobs:
               -e BOT_ID=${{ secrets.BOT_ID }} \
               -e OAUTH_GOOGLE=${{ secrets.OAUTH_GOOGLE }} \
               -e GOOGLE_APPLICATION_CREDENTIALS="${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}" \
-              ${{ secrets.DOCKER_NAME }}/michibot
+              ${{ secrets.DOCKER_NAME }}/michibot:latest
 
             echo "Deployment complete!"
