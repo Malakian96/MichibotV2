@@ -44,7 +44,7 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           script: |
             # Pull the Docker image from Docker Hub
-            docker pull ${{ secrets.DOCKER_NAME }}/michibot:latest
+            docker pull michibot
 
             # Stop and remove the existing container (if it exists)
             docker stop michibot || true
