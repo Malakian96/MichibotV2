@@ -21,7 +21,7 @@ jobs:
       # Step 3: Build the Docker image for ARM
       - name: Build Docker image for ARM
         run: |
-          docker buildx build --platform linux/arm/v7 -t michibot --load .
+          docker buildx build --platform linux/arm/v7 -t ${{ secrets.DOCKER_NAME }}/michibot:latest --load .
 
       # Step 4: Login to Docker Hub
       - name: Log in to Docker Hub
@@ -33,7 +33,7 @@ jobs:
       # Step 5: Push the Docker image to Docker Hub
       - name: Push Docker image to Docker Hub
         run: |
-          docker push michibot
+          docker push ${{ secrets.DOCKER_NAME }}/michibot:latest
 
       # Step 6: SSH into Raspberry Pi and deploy the container
       - name: Deploy on Raspberry Pi
@@ -44,7 +44,7 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           script: |
             # Pull the Docker image from Docker Hub
-            docker pull michibot
+            docker pull ${{ secrets.DOCKER_NAME }}/michibot:latest
 
             # Stop and remove the existing container (if it exists)
             docker stop michibot || true
