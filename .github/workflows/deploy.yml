@@ -28,7 +28,7 @@ jobs:
         uses: docker/login-action@v2
         with:
           username: ${{ secrets.DOCKER_NAME }}
-          secrets: ${{ secrets.DOCKER_PASSWORD }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
 
       # Step 5: Push the Docker image to Docker Hub
       - name: Push Docker image to Docker Hub
