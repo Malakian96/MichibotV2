@@ -40,6 +40,9 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           port: ${{ secrets.SSH_PORT }}
           script: |
+            # Login docker
+            docker login
+
             # Pull the Docker image from Docker Hub
             docker pull ${{ secrets.DOCKER_NAME }}/michibot:latest
 
