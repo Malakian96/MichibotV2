@@ -1,4 +1,4 @@
-import { Client, GatewayIntentBits, Events } from "discord.js";
+import { Events } from "discord.js";
 import { refreshSlashCommands } from "./controller/command-config";
 import { handleJoinCommands } from "./controller/join-commands";
 import { handleTextCommands } from "./controller/text-commands";

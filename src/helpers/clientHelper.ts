@@ -1,31 +1,31 @@
 import { Client, GatewayIntentBits } from "discord.js";
 
 class ClientHelper {
-    static instance: any;
-    client!: Client;
+  static instance: InstanceType<typeof ClientHelper>;
+  client!: Client;
 
-    constructor() {
-        if (ClientHelper.instance) {
-            return ClientHelper.instance;
-        }
-        
-        this.client = new Client({
-            intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildVoiceStates],
-        });
-    
-        ClientHelper.instance = this;
+  constructor() {
+    if (ClientHelper.instance) {
+      return ClientHelper.instance;
     }
 
-    async login(): Promise<Client>{
-        const TOKEN = process.env.TOKEN;
-        await this.client.login(TOKEN);
+    this.client = new Client({
+      intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildVoiceStates],
+    });
 
-        return this.client;
-    }
+    ClientHelper.instance = this;
+  }
 
-    getClient() {
-        return this.client;
-    }
+  async login(): Promise<Client> {
+    const TOKEN = process.env.TOKEN;
+    await this.client.login(TOKEN);
+
+    return this.client;
+  }
+
+  getClient() {
+    return this.client;
+  }
 }
 
 export default new ClientHelper();

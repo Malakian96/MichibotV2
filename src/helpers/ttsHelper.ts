@@ -3,7 +3,7 @@ import { google } from "@google-cloud/text-to-speech/build/protos/protos";
 import fs from "fs";
 import path from "path";
 
-export const createTTS = async (request: google.cloud.texttospeech.v1.ISynthesizeSpeechRequest | {}) => {
+export const createTTS = async (request: google.cloud.texttospeech.v1.ISynthesizeSpeechRequest | object) => {
   // Initialize Google Cloud Text-to-Speech client
   const client = new textToSpeech.TextToSpeechClient();
   // Perform the TTS request
@@ -16,6 +16,6 @@ export const createTTS = async (request: google.cloud.texttospeech.v1.ISynthesiz
     console.log("Existing file deleted: assets/tts-output.mp3");
   }
 
-  fs.writeFileSync(ttsFilePath, response.audioContent as any, "binary");
+  fs.writeFileSync(ttsFilePath, response.audioContent, "binary");
   console.log("Audio content written to file: tts-output.mp3");
 };

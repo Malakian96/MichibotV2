@@ -5,15 +5,18 @@ import {
   userIsInVoiceChannel,
   replyNotInChannel,
   reply,
-  editReply
+  editReply,
 } from "../../helpers/voiceChannelHelper";
 import { createTTS } from "../../helpers/ttsHelper";
-import { Interaction } from "discord.js";
+import { ChatInputCommandInteraction, GuildMember, VoiceChannel } from "discord.js";
 
-export const textToSpeechCommand = async (interaction: Interaction | any) => {
+export const textToSpeechCommand = async (
+  interaction: ChatInputCommandInteraction
+) => {
+  const member = interaction.member as GuildMember;
   if (!interaction.member) return;
   // Check if the user is in a voice channel
-  const userVoiceChannel = interaction.member.voice.channel;
+  const userVoiceChannel = member.voice.channel;
   if (!userIsInVoiceChannel(interaction)) {
     replyNotInChannel(interaction);
     return;
@@ -22,13 +25,18 @@ export const textToSpeechCommand = async (interaction: Interaction | any) => {
   const gender = interaction.options.getString("voice") ?? "MALE";
   const languageCode = interaction.options.getString("language") ?? "es-ES";
 
-  if(text.length > 100){
-    console.error("Exceded maximum length for TTS:");
+  if (!text) {
     await editReply(
       interaction,
-      "Exceded maximum length for TTS.",
-      true,
+      "Text input is empty.",
+      true
     );
+    return;
+  }
+
+  if (text.length > 100) {
+    console.error("Exceded maximum length for TTS:");
+    await editReply(interaction, "Exceded maximum length for TTS.", true);
     return;
   }
 
@@ -57,14 +65,14 @@ export const textToSpeechCommand = async (interaction: Interaction | any) => {
     await createTTS(request);
 
     // Join the voice channel and play the audio
-    const connection = await join(userVoiceChannel);
+    const connection = join(userVoiceChannel as VoiceChannel);
     await play("tts-output.mp3", connection, false);
   } catch (error) {
     console.error("Error generating TTS:", error);
     await editReply(
       interaction,
       "Failed to generate TTS. Please try again.",
-      true,
+      true
     );
   }
 };
