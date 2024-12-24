@@ -22,7 +22,7 @@ export const join = (channel: VoiceChannel): VoiceConnection => {
   if (!voiceChannel) {
     throw Error("El canal de voz no existe!");
   }
-  
+
   return joinVoiceChannel({
     channelId: voiceChannel.id,
     guildId: voiceChannel.guild.id,
@@ -34,7 +34,7 @@ export const join = (channel: VoiceChannel): VoiceConnection => {
 // Función para monitorear actividad de usuarios
 function monitorUserActivity(
   connection: VoiceConnection,
-  voiceChannel: VoiceChannel
+  voiceChannel: VoiceChannel,
 ) {
   const receiver = connection.receiver;
 
@@ -70,7 +70,7 @@ function monitorUserActivity(
       const timeSinceLastActivity = now - activity.lastActivity;
       if (!activity.active && timeSinceLastActivity > 90000) {
         console.log(
-          `El usuario ${user.user.tag} ha estado inactivo durante más de 45 segundos.`
+          `El usuario ${user.user.tag} ha estado inactivo durante más de 45 segundos.`,
         );
         play("darkusmeow2.mp3", connection, false); // Michibot maúlla
         userActivity.set(userId, { ...activity, lastActivity: now }); // Resetea el temporizador

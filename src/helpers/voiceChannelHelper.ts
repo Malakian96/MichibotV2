@@ -1,14 +1,18 @@
-import { ChatInputCommandInteraction } from 'discord.js';
+import { ChatInputCommandInteraction } from "discord.js";
 
-export const userIsInVoiceChannel = async (interaction: ChatInputCommandInteraction ) => {
+export const userIsInVoiceChannel = async (
+  interaction: ChatInputCommandInteraction,
+) => {
   return Boolean(interaction?.member?.voice.channel);
 };
 
-export const replyNotInChannel = async (interaction: ChatInputCommandInteraction) => {
+export const replyNotInChannel = async (
+  interaction: ChatInputCommandInteraction,
+) => {
   const userInChannnel = userIsInVoiceChannel(interaction);
   if (!userInChannnel) {
     await interaction.reply(
-      'You need to be in a voice channel to use this command!',
+      "You need to be in a voice channel to use this command!",
     );
   }
   return userInChannnel;

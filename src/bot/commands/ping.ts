@@ -1,1 +1,2 @@
-export const ping = async (interaction: any) => await interaction.reply("Pong!");
+export const ping = async (interaction: any) =>
+  await interaction.reply("Pong!");

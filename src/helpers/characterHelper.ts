@@ -39,7 +39,7 @@ export const manageCharacterLimit = (textLength: number) => {
       console.error(
         `Daily character limit exceeded! Remaining characters: ${
           DAILY_CHAR_LIMIT - usedChars
-        }`
+        }`,
       );
       return { success: false, remainingChars: DAILY_CHAR_LIMIT - usedChars };
     }

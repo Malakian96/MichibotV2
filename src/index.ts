@@ -3,17 +3,15 @@ import { start as startApi } from "./api";
 import ClientHelper from "./helpers/clientHelper";
 
 const startSingletons = async () => {
-    await ClientHelper.login();
-}
+  await ClientHelper.login();
+};
 
 (async () => {
-    try{
-        startSingletons();
-        startBot();
-        startApi();
-    }catch(error){
-        console.error("Fatal ERROR on ini", error)
-    }
-
+  try {
+    startSingletons();
+    startBot();
+    startApi();
+  } catch (error) {
+    console.error("Fatal ERROR on ini", error);
+  }
 })();
-

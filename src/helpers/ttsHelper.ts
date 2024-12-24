@@ -3,7 +3,9 @@ import { google } from "@google-cloud/text-to-speech/build/protos/protos";
 import fs from "fs";
 import path from "path";
 
-export const createTTS = async (request: google.cloud.texttospeech.v1.ISynthesizeSpeechRequest | object) => {
+export const createTTS = async (
+  request: google.cloud.texttospeech.v1.ISynthesizeSpeechRequest | object,
+) => {
   // Initialize Google Cloud Text-to-Speech client
   const client = new textToSpeech.TextToSpeechClient();
   // Perform the TTS request

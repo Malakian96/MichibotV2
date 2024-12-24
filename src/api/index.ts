@@ -42,7 +42,7 @@ export const start = () => {
       res.send([]);
     }
     const guilds = client.guilds.cache.map(
-      (guild: import("discord.js").Guild) => guild
+      (guild: import("discord.js").Guild) => guild,
     );
     res.send(guilds);
   });
@@ -67,7 +67,7 @@ export const start = () => {
           .filter(
             (channel) =>
               channel.type === 2 && // 2: Canal de voz
-              channel.permissionsFor(member).has(["ViewChannel", "Connect"])
+              channel.permissionsFor(member).has(["ViewChannel", "Connect"]),
           )
           .map((channel) => ({
             id: channel.id,
@@ -82,7 +82,7 @@ export const start = () => {
       } catch (error: any) {
         console.error(
           `Error al procesar la guild ${guild.name}:`,
-          error.message
+          error.message,
         );
       }
     }
@@ -119,7 +119,7 @@ export const start = () => {
       const audioFiles = files.filter(
         (file) =>
           [".mp3", ".wav", ".ogg"].includes(path.extname(file)) &&
-          !file.includes("tts-output")
+          !file.includes("tts-output"),
       );
 
       res.json(audioFiles);

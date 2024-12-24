@@ -8,10 +8,14 @@ import {
   editReply,
 } from "../../helpers/voiceChannelHelper";
 import { createTTS } from "../../helpers/ttsHelper";
-import { ChatInputCommandInteraction, GuildMember, VoiceChannel } from "discord.js";
+import {
+  ChatInputCommandInteraction,
+  GuildMember,
+  VoiceChannel,
+} from "discord.js";
 
 export const textToSpeechCommand = async (
-  interaction: ChatInputCommandInteraction
+  interaction: ChatInputCommandInteraction,
 ) => {
   const member = interaction.member as GuildMember;
   if (!interaction.member) return;
@@ -26,11 +30,7 @@ export const textToSpeechCommand = async (
   const languageCode = interaction.options.getString("language") ?? "es-ES";
 
   if (!text) {
-    await editReply(
-      interaction,
-      "Text input is empty.",
-      true
-    );
+    await editReply(interaction, "Text input is empty.", true);
     return;
   }
 
@@ -46,7 +46,7 @@ export const textToSpeechCommand = async (
     await reply(
       interaction,
       `Daily character limit exceeded! You have ${remainingChars} characters remaining.`,
-      true
+      true,
     );
     return;
   }
@@ -72,7 +72,7 @@ export const textToSpeechCommand = async (
     await editReply(
       interaction,
       "Failed to generate TTS. Please try again.",
-      true
+      true,
     );
   }
 };
