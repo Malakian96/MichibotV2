@@ -10,14 +10,18 @@ import path from "path";
 // const __filename = fileURLToPath(import.meta.url);
 // const __dirname = path.dirname(__filename);
 
-export const play = (resourceName: string, connection: VoiceConnection, destroy = true) => {
+export const play = (
+  resourceName: string,
+  connection: VoiceConnection,
+  destroy = true,
+) => {
   // Crear un reproductor de audio
   const player = createAudioPlayer();
 
   // Crear el recurso de audio con el sonido del maullido
   console.log("Playing sound...", resourceName);
   const resource = createAudioResource(
-    path.join(__dirname, "../../..", "assets", resourceName)
+    path.join(__dirname, "../../..", "assets", resourceName),
   );
 
   // Reproducir el audio

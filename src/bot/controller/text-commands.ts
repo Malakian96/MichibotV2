@@ -1,9 +1,11 @@
-import { Interaction } from "discord.js";
+import { ChatInputCommandInteraction } from "discord.js";
 import { textCommands } from "./command-router";
 
-export const handleTextCommands = async (interaction: Interaction | any) => {
+export const handleTextCommands = async (
+  interaction: ChatInputCommandInteraction | any,
+) => {
   const commandToExecute = textCommands.find(
-    (command) => command.name === interaction.commandName
+    (command) => command.name === interaction.commandName,
   );
   if (!commandToExecute) {
     interaction.reply("unknown command");

@@ -13,7 +13,7 @@ export const refreshSlashCommands = async () => {
     console.log("Started refreshing application (/) commands.");
     await rest.put(
       Routes.applicationGuildCommands(CLIENT_ID, "1303134031315075102"),
-      { body: commands.map((cmd) => cmd.builder.toJSON()) }
+      { body: commands.map((cmd) => cmd.builder.toJSON()) },
     );
     await rest.put(Routes.applicationCommands(CLIENT_ID), {
       body: commands.map((cmd) => cmd.builder.toJSON()),

@@ -27,7 +27,7 @@ export const textCommands = [
           .setName("text")
           .setDescription("The text you want to convert to speech")
           .setRequired(true)
-          .setMaxLength(100)
+          .setMaxLength(100),
       )
       .addStringOption((option) =>
         option
@@ -37,8 +37,8 @@ export const textCommands = [
           .addChoices(
             { name: "Español", value: "es-ES" },
             { name: "English", value: "en-US" },
-            { name: "Japones", value: "ja-JP" }
-          )
+            { name: "Japones", value: "ja-JP" },
+          ),
       )
       .addStringOption((option) =>
         option
@@ -47,8 +47,8 @@ export const textCommands = [
           .setRequired(true)
           .addChoices(
             { name: "Male", value: "MALE" },
-            { name: "Female", value: "FEMALE" }
-          )
+            { name: "Female", value: "FEMALE" },
+          ),
       ),
     callback: textToSpeechCommand,
   },
